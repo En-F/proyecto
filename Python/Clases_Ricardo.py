@@ -711,14 +711,16 @@ def anyadir_elemento(lista):
 
 def cambiar_elemento(lista):
     """Cambia el valor de un elemento en la lista"""
-    indice = int(input("Introduce el índice del elemento a cambiar: "))
-    if 0 <= indice < len(lista):
-        nuevo_valor = input(f"Introduce el nuevo valor para el elemento en el índice {indice}: ")
-        lista[indice] = nuevo_valor
-        print(f"Elemento en el índice {indice} cambiado por '{nuevo_valor}'.")
-    else:
-        print("Índice fuera de rango.")
-
+    try:
+        indice = int(input("Introduce el índice del elemento a cambiar: "))
+        if 0 <= indice < len(lista):
+            nuevo_valor = input(f"Introduce el nuevo valor para el elemento en el índice {indice}: ")
+            lista[indice] = nuevo_valor
+            print(f"Elemento en el índice {indice} cambiado por '{nuevo_valor}'.")
+        else:
+            print("Índice fuera de rango.")
+    except ValueError:
+        print("Por favor, introduce un índice válido.")
 
 def eliminar_elemento(lista):
     """Elimina un elemento de la lista"""
