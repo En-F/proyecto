@@ -1,1 +1,1 @@
-<h1>Este es un repositorio de oruebas vinculandoa Visual Studio</h1>
+<h1>Este es un repositorio dedicado solo a Python</h1>
