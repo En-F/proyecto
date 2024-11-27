@@ -808,3 +808,13 @@ for i, emple in enumerate(empleados):
     
 # Imprimir la suma total de todos los salarios aumentados
 print("Salario total es", suma)
+
+#------------------------------------------------------------------------------
+def emparejar(lista: list) -> list:
+    res = []
+    for i in range(len(lista) - 1):  # Recorremos hasta el penúltimo elemento
+        res.append((lista[i], lista[i + 1]))  # Emparejamos el elemento con el siguiente
+    return res
+
+# Ejemplo de uso
+print(emparejar(['a', 'b', 'c', 'd']))
