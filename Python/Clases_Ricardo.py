@@ -811,10 +811,11 @@ print("Salario total es", suma)
 
 #------------------------------------------------------------------------------
 def emparejar(lista: list) -> list:
-    res = []
-    for i in range(len(lista) - 1):  # Recorremos hasta el penúltimo elemento
-        res.append((lista[i], lista[i + 1]))  # Emparejamos el elemento con el siguiente
-    return res
+    res = []  # Inicializamos una lista vacía donde almacenaremos los resultados
+    for e in lista:  # Iteramos sobre cada elemento en la lista
+        res.append((0, e))  # Emparejamos el elemento con el valor 0 y lo agregamos a 'res'
+    return res  # Retornamos la lista de tuplas con el valor (0, elemento)
 
 # Ejemplo de uso
 print(emparejar(['a', 'b', 'c', 'd']))
+
