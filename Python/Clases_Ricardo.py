@@ -824,3 +824,48 @@ print(emparejar(['a', 'b', 'c', 'd']))
 def emparejar(lista: list) -> list:
     return [(0, x ) for x in lista]
 print(emparejar(['a', 'b', 'c', 'd']))
+
+#------------------------------------------------------------------------------
+def emparejar(lista: list) -> list:
+    return [(i, e) for i, e in enumerate(lista, )]  # Emparejamos índice y valor comenzando desde el índice 5
+print(emparejar(['a', 'b', 'c']))  # Lista de ejemplo
+
+
+#------------------------------------------------------------------------------
+from itertools import cycle
+
+def emparejar(lista: list) -> list:
+    return [(i, e) for i, e in zip(cycle([1, 2]), lista)]  # Emparejamos la secuencia cíclica con la lista
+print(emparejar(['a', 'b', 'c', 'd']))  # Lista de ejemplo
+
+
+for a, b  in zip([1,2,3,4,5,6,7,8,9], ['a', 'b', 'c','a', 'e', 'g', 'u', 'r']):
+    print(a, b)
+    """
+    1 a
+    2 b
+    3 c
+    4 a
+    5 e
+    6 g
+    7 u
+    8 r
+    """
+
+def parejas(filas, columnas):
+#return [(x, y ) for x in range(4) for y in range (3)]  
+  res = []
+    for fila in range(filas):
+        for columna in range(columnas):
+            res.append((fila, columna))
+
+    return res
+
+
+print(parejas(2,3))
+"""
+print(2,3) = [ (0,0) , (0,1) , (0,2)
+               (1,0) , (1,1) , (1,2)
+               (2,0) , (2,1) , (2,2)
+                                   ]
+"""
