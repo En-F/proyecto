@@ -776,3 +776,35 @@ empleados = [('María', 'González', 1800.23),
 # Se pide escribir un programa que modifique la lista de empleados incrementando en un
 # 10 % el salario de cada empleado y muestre por pantalla el salario total de los empleados
 # de la empresa.
+
+# Lista de empleados, donde cada tupla contiene (nombre, apellido, salario)
+empleados = [('María', 'González', 1800.23),
+             ('Javier', 'Ruiz', 1630.50),
+             ('Jesús', 'Pérez', 2100.42),
+             ('Rosa', 'Muñoz', 2240.78)
+]
+
+# Variable para acumular el total de los salarios después del aumento
+suma = 0
+
+# Iterar sobre cada empleado usando 'enumerate' para obtener índice 'i' y los datos de cada empleado 'emple'
+for i, emple in enumerate(empleados):
+    # Desempaquetar la tupla en nombre, apellido y salario
+    nombre, apellido, salario = emple
+    
+    nuevo = (nombre, apellido, salario )
+    
+    # Redondear el salario aumentado a 2 decimales
+    salario = round(salario * 1.10, 2)
+    
+    # Reemplazar la tupla en la lista de empleados con el nuevo salario
+    empleados[i] = nuevo
+    
+    # Imprimir los datos del empleado con el nuevo salario
+    print("empleado", nombre, apellido, "con salario", salario)
+    
+    # Acumular el nuevo salario en la variable 'suma'
+    suma += salario
+    
+# Imprimir la suma total de todos los salarios aumentados
+print("Salario total es", suma)
