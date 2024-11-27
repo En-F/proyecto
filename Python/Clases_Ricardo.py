@@ -819,3 +819,8 @@ def emparejar(lista: list) -> list:
 # Ejemplo de uso
 print(emparejar(['a', 'b', 'c', 'd']))
 
+#OTRA
+
+def emparejar(lista: list) -> list:
+    return [(0, x ) for x in lista]
+print(emparejar(['a', 'b', 'c', 'd']))
