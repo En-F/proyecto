@@ -62,3 +62,4 @@ ORDER BY "Plan", "Proyecto";
        3 | Profundiza                |          5 | Banco Sabadell    |           9 | Lion
        3 | Profundiza                |          5 | Banco Sabadell    |           6 | Panther
        3 | Profundiza                |          5 | Banco Sabadell    |           7 | Sapphire
+
