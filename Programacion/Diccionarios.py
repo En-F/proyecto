@@ -16,7 +16,7 @@ print(histograma("Esto es una prueba de cadena de ejemplo"))
 
 def distribucion(s: str) -> dict[str, int]:
     """Devuelve la distribución de repetición de los caracteres de una cadena."""
-    res = {}  # Creamos un diccionario vacío para almacenar las frecuencias de los caracteres
+    res = {}  # Diccionario vacío para almacenar las frecuencias de los caracteres
     for c in s:  # Iteramos sobre cada carácter de la cadena
         if c in res:  # Si el carácter ya está en el diccionario, incrementamos su frecuencia
             res[c] += 1
@@ -24,11 +24,14 @@ def distribucion(s: str) -> dict[str, int]:
             res[c] = 1
     return res  # Devolvemos el diccionario con las frecuencias de los caracteres
 
+
 def histograma(s: str) -> None:
     """Dibuja el histograma de una cadena."""
     # Iteramos sobre las claves y valores del diccionario devuelto por distribucion(s)
     for c, n in distribucion(s).items():
         print(c, '=' * n)  # Imprimimos el carácter seguido de n signos '='
 
-# Probamos la función histograma con una cadena de ejemplo
-histograma("Esto es una prueba de una secuencia de caracteres")
+# Probamos la función distribucion y la función histograma con una cadena de ejemplo
+cadena = "Esto es una prueba de una secuencia de caracteres"
+print(distribucion(cadena))  # Muestra el diccionario con las frecuencias
+histograma(cadena)  # Muestra el histograma con los caracteres
