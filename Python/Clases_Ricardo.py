@@ -853,13 +853,12 @@ for a, b  in zip([1,2,3,4,5,6,7,8,9], ['a', 'b', 'c','a', 'e', 'g', 'u', 'r']):
     """
 
 def parejas(filas, columnas):
-#return [(x, y ) for x in range(4) for y in range (3)]  
-  res = []
+    res = []
     for fila in range(filas):
         for columna in range(columnas):
             res.append((fila, columna))
-
     return res
+
 
 
 print(parejas(2,3))
