@@ -868,3 +868,26 @@ print(2,3) = [ (0,0) , (0,1) , (0,2)
                (2,0) , (2,1) , (2,2)
                                    ]
 """
+
+from random import randrange
+
+bombo = list(range(100))
+
+while len(bombo) > 0:
+    i = randrange(len(bombo))
+    n = bombo.pop(i)
+    print(n, end=' ')
+
+
+def histograma(s: str) -> dict[str, int]:
+    """Devuelve el histograma de una cadena"""
+    res = {}  # Inicializamos un diccionario vacío para almacenar las frecuencias
+    for c in s:  # Recorremos cada carácter de la cadena
+        if c in res:  # Si el carácter ya está en el diccionario, aumentamos su frecuencia
+            res[c] += 1
+        else:  # Si no está en el diccionario, lo añadimos con frecuencia 1
+            res[c] = 1
+    return res  # Devolvemos el diccionario con las frecuencias
+
+# Probamos la función con una cadena de ejemplo
+print(histograma("Esto es una prueba de cadena de ejemplo"))
