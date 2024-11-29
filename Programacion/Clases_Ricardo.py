@@ -891,3 +891,4 @@ def histograma(s: str) -> dict[str, int]:
 
 # Probamos la función con una cadena de ejemplo
 print(histograma("Esto es una prueba de cadena de ejemplo"))
+
