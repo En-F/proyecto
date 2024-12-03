@@ -35,3 +35,59 @@ def histograma(s: str) -> None:
 cadena = "Esto es una prueba de una secuencia de caracteres"
 print(distribucion(cadena))  # Muestra el diccionario con las frecuencias
 histograma(cadena)  # Muestra el histograma con los caracteres
+
+
+
+#------------------------------------------------------------------------------------------
+
+
+# Diccionario de caracteres a código Morse
+def morse(mensaje):
+    cars_a_puntos = {
+        'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+        'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+        'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+        'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+        'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--',
+        '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..',
+        '9': '----.', '0': '-----', ' ': ' '
+    }
+    res = ""
+    for c in mensaje.upper():  # Convertir el mensaje a mayúsculas
+        if c in cars_a_puntos:  # Si el carácter está en el diccionario
+            res += cars_a_puntos[c]  # Añadir la representación Morse del carácter
+            res += " "  # Separar cada código Morse con un espacio
+    return res.strip()  # Eliminar el último espacio extra
+
+# Llamar a la función con el mensaje "HELP ME"
+print(morse("HELP ME"))
+
+
+#------------------------------------------------------------------------------------------
+#OTRA VERSION
+
+
+def morse(mensaje):
+    # Diccionario de caracteres a código Morse
+    cars_a_puntos = {
+        'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+        'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+        'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+        'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+        'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--',
+        '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..',
+        '9': '----.', '0': '-----', ' ': ' '
+    }
+    
+    # Inicializamos una lista vacía para guardar los códigos Morse
+    res = []
+    # Recorremos cada carácter del mensaje en mayúsculas
+    for c in mensaje.upper():
+        # Si el carácter está en el diccionario, lo agregamos a la lista
+        if c in cars_a_puntos:
+            res.append(cars_a_puntos[c])
+    # Unimos la lista de códigos Morse en una cadena, separada por espacios
+    return " ".join(res)
+
+# Ejemplo de uso:
+print(morse("HELP ME"))
