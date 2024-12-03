@@ -39,31 +39,6 @@ histograma(cadena)  # Muestra el histograma con los caracteres
 
 
 #------------------------------------------------------------------------------------------
-
-
-# Diccionario de caracteres a código Morse
-def morse(mensaje):
-    cars_a_puntos = {
-        'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
-        'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
-        'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
-        'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
-        'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--',
-        '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..',
-        '9': '----.', '0': '-----', ' ': ' '
-    }
-    res = ""
-    for c in mensaje.upper():  # Convertir el mensaje a mayúsculas
-        if c in cars_a_puntos:  # Si el carácter está en el diccionario
-            res += cars_a_puntos[c]  # Añadir la representación Morse del carácter
-            res += " "  # Separar cada código Morse con un espacio
-    return res.strip()  # Eliminar el último espacio extra
-
-# Llamar a la función con el mensaje "HELP ME"
-print(morse("HELP ME"))
-
-
-#------------------------------------------------------------------------------------------
 #OTRA VERSION
 
 
