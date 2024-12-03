@@ -868,6 +868,7 @@ print(2,3) = [ (0,0) , (0,1) , (0,2)
                (2,0) , (2,1) , (2,2)
                                    ]
 """
+#------------------------------------------------------------------------------
 
 from random import randrange
 
@@ -892,3 +893,64 @@ def histograma(s: str) -> dict[str, int]:
 # Probamos la función con una cadena de ejemplo
 print(histograma("Esto es una prueba de cadena de ejemplo"))
 
+#------------------------------------------------------------------------------
+
+
+def sobre(m,n):
+    """ Calcula m sobre n """
+    if m == 0 and n > 0:
+        return 0
+    if m >= 0 and n ==0:
+        return 1
+    return sobre(m-1, n - 1) + sobre(m - 1, n)
+
+def factorial(n):
+    res = 1
+    while n >= 1:
+        res *= n
+        n-= 1
+    return res
+
+
+
+def sobre2(m ,n):
+    return factorial(m) // (factorial(n) * factorial(m - n))
+
+
+
+def sobre(m, n):
+    """ Calcula m sobre n (Coeficiente Binomial) de manera recursiva """
+    if m == 0 and n > 0:  # Si m es 0 y n es mayor que 0, no se puede elegir más elementos de los que hay
+        return 0
+    if m >= 0 and n == 0:  # Si n es 0, siempre hay una forma de elegir 0 elementos (C(m, 0) = 1)
+        return 1
+    # Fórmula recursiva: C(m, n) = C(m-1, n-1) + C(m-1, n)
+    return sobre(m - 1, n - 1) + sobre(m - 1, n)
+
+def factorial(n):
+    """Calcula el factorial de n"""
+    res = 1
+    while n >= 1:
+        res *= n  # Multiplicamos res por cada número de n hasta llegar a 1
+        n -= 1  # Disminuimos n en cada iteración
+    return res
+
+def sobre2(m, n):
+    """Otra forma de calcular m sobre n utilizando la fórmula de factorial"""
+    return factorial(m) // (factorial(n) * factorial(m - n))
+
+def triangulo(filas) -> None:
+    """Construye el triángulo de Pascal"""
+    for m in range(filas):
+        # Imprime espacios para centrar el triángulo
+        print('  ' * (filas - m), end='')  
+        
+        for n in range(m + 1):
+            # Imprime cada valor de m sobre n (coeficiente binomial)
+            print(f"{sobre(m , n):3}", end=' ')
+        
+        # Salto de línea al final de cada fila
+        print()
+
+# Ejemplo de uso
+triangulo(5)  # Llamada para generar un triángulo de 5 filas
