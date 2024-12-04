@@ -954,3 +954,5 @@ def triangulo(filas) -> None:
 
 # Ejemplo de uso
 triangulo(5)  # Llamada para generar un triángulo de 5 filas
+
+

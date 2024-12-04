@@ -66,3 +66,30 @@ def morse(mensaje):
 
 # Ejemplo de uso:
 print(morse("HELP ME"))
+
+
+#------------------------------------------------------------------------------------------
+
+def list2dict(lista: list)-> dict:
+    """Devuelve el diccioario equivalente a una lista"""
+    res = {}
+    for i, e in enumerate(lista):
+        res[i] = e
+    return res
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+def list2dict(lista: list)-> dict:
+    """Devuelve el diccioario equivalente a una lista"""
+    return {i:e for i, e in enumerate(lista)}
+        
+        
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+def list2dict(dic: dict)-> list:
+    """Recorre un dicionario y devulve una lista"""
+    res = [None] * (max(dic) + 1)
+    for k, v in dic.items():
+        res[k] = v
+    return res
