@@ -956,3 +956,19 @@ def triangulo(filas) -> None:
 triangulo(5)  # Llamada para generar un triángulo de 5 filas
 
 
+#------------------------------------------------------------------------------
+"""
+Ejercicio de cuadrados
+"""
+
+def cuadrados(n: int) -> list[list[int]]:
+# Devuelve un cuadrado n * n con los números del 1 al n*n.
+res = []  
+c = 1      # Comienza el contador en 1, que será el valor que se agregará a la matriz
+for i in range(n):  # Bucle exterior que se repite n veces, una por cada fila
+    f = []  # Crea una lista vacía que representará una fila del cuadrado 
+    for j in range(n):  # Bucle interior que se repite n veces, una por cada columna
+        f.append(c)  # Agrega el valor actual de c a la fila
+        c += 1        # Incrementa el valor de c para el siguiente número
+    res.append(f)  # Después de completar una fila, se agrega a la lista de resultados
+return res  # Devuelve la lista res que contiene el cuadrado completo
