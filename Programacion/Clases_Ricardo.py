@@ -963,12 +963,58 @@ Ejercicio de cuadrados
 
 def cuadrados(n: int) -> list[list[int]]:
 # Devuelve un cuadrado n * n con los números del 1 al n*n.
-res = []  
-c = 1      # Comienza el contador en 1, que será el valor que se agregará a la matriz
-for i in range(n):  # Bucle exterior que se repite n veces, una por cada fila
-    f = []  # Crea una lista vacía que representará una fila del cuadrado 
-    for j in range(n):  # Bucle interior que se repite n veces, una por cada columna
-        f.append(c)  # Agrega el valor actual de c a la fila
-        c += 1        # Incrementa el valor de c para el siguiente número
-    res.append(f)  # Después de completar una fila, se agrega a la lista de resultados
-return res  # Devuelve la lista res que contiene el cuadrado completo
+    res = []  
+    c = 1      # Comienza el contador en 1, que será el valor que se agregará a la matriz
+    for i in range(n):  # Bucle exterior que se repite n veces, una por cada fila
+        f = []  # Crea una lista vacía que representará una fila del cuadrado 
+        for j in range(n):  # Bucle interior que se repite n veces, una por cada columna
+            f.append(c)  # Agrega el valor actual de c a la fila
+            c += 1        # Incrementa el valor de c para el siguiente número
+        res.append(f)  # Después de completar una fila, se agrega a la lista de resultados
+    return res  # Devuelve la lista res que contiene el cuadrado completo
+
+
+def imprimir_cuadrado(c: list[list[int]]) -> None:
+    """Imprime el cuadradro generado por la funcion cuadrado() """
+    for fila in c:
+        for e in fila:
+            print(f"{e:3}", end=' ')
+        print()
+        
+
+imprimir_cuadrado(cuadrado(7))
+
+#------------------------------------------------------------------------------
+
+from itertools import count  # Importa 'count' de itertools para generar números secuenciales
+
+def cuadrado_magico(n: int):
+    """Devuelve el cuadrado mágico de n * n"""
+    
+    # Inicializa una matriz de n x n con ceros. Usamos una lista por comprensión para evitar referencias compartidas.
+    res = [[0] * n for _ in range(n)]  
+    
+    c = count(1)  # Crea un generador que produce números secuenciales comenzando desde 1
+    fila, col = 0, n // 2  # Comienza en la primera fila y la columna central
+
+    # Rellena la matriz con los números del 1 al n^2
+    for _ in range(n * n):
+        res[fila][col] = next(c)  # Coloca el siguiente número del generador en la posición actual
+        
+        # Calcula la siguiente fila y columna según las reglas del cuadrado mágico:
+        # 1. La fila se mueve hacia arriba (decrementando), pero con el operador % se envuelve de nuevo
+        #    al llegar al principio (fila = 0), para permitir un movimiento cíclico.
+        # 2. La columna se mueve hacia la derecha (incrementando), y también se envuelve con % cuando
+        #    se llega al final (col = n-1).
+        nueva_fila, nueva_col = (fila - 1) % n, (col + 1) % n
+        
+        # Si la nueva posición ya está ocupada, movemos hacia abajo en lugar de hacia arriba
+        if res[nueva_fila][nueva_col] != 0:
+            nueva_fila, nueva_col = fila + 1, col  # Se mueve hacia abajo (fila + 1) y se mantiene la columna igual
+        
+        # Actualizamos la fila y columna con las nuevas posiciones calculadas
+        fila, col = nueva_fila, nueva_col
+    
+    return res  # Devuelve la matriz que contiene el cuadrado mágico generado
+
+#------------------------------------------------------------------------------
