@@ -93,3 +93,24 @@ def list2dict(dic: dict)-> list:
     for k, v in dic.items():
         res[k] = v
     return res
+
+
+
+
+
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#Ejercicicio de Diccionario
+estudiantes = {"Antonio": 9.0, "Paco": 6.0, "Rube": 4.0, "Maria": 9.0, "Mario": 9.5}
+def clasificar(estudiantes):
+    res = {"Apro": [], "Susp": [], "Sob": []}
+    for clave, valor in estudiantes.items():
+        if valor >= 9:
+            res["Sob"].append(clave)
+        elif valor >= 6:
+            res["Apro"].append(clave)
+        elif valor < 6 :
+            res["Susp"].append(clave)
+    return res
