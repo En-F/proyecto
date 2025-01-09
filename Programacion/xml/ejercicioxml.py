@@ -55,3 +55,34 @@ for nota in raiz.iter('nota'):
 
 # Guardamos los cambios realizados en el árbol XML en un nuevo archivo llamado 'salida.xml'.
 arbol.write('salida.xml',encoding='utf-8', xml_declaration=True)
+
+
+#Modifica añadiendo un nombre a la etiqueta propio de nombre.
+import xml.etree.ElementTree as ET
+
+arbol = ET.parse("archivo.xml")
+raiz = arbol.getroot()
+
+# Recorremos todos los elementos <alumno> dentro del árbol XML.
+for alumno in raiz.findall('alumno'):
+    # Dentro de cada <alumno>, buscamos el subelemento <nota>.
+    nota = alumno.find('nota')
+
+    # Convertimos el valor de la <nota> a entero, le sumamos 1, y lo almacenamos en 'nueva_nota'.
+    nueva_nota = int(nota.text) + 1
+
+    # Actualizamos el contenido de texto de la <nota> con el nuevo valor (nueva_nota).
+    nota.text = str(nueva_nota)
+
+    # Establecemos un atributo 'modificado' con valor 'si' en el elemento <nota>.
+    nota.set('modificado', 'si')
+
+    # Buscamos el subelemento <nombre> dentro de <alumno> y luego buscamos su subelemento <propio>.
+    nombre = alumno.find('nombre/propio')
+
+    # Modificamos el valor de <propio> agregando la palabra ' María' al final del texto original.
+    nombre.text = nombre.text + ' María'
+
+# Guardamos el árbol XML modificado en un nuevo archivo llamado 'salida.xml'.
+# El archivo se guarda con codificación UTF-8 y se incluye una declaración XML en el encabezado.
+arbol.write('salida.xml', encoding='utf-8', xml_declaration=True)

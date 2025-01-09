@@ -94,4 +94,12 @@ lista.sort()
 
 for t  in lista:
     print(t[1:])
+
+
+for nota in raiz.iter('nota'):
     
+    nueva_nota = int(nota.text) + 1
+    nota.text = str(nueva_nota)
+    nota.set('modificado', 'si')
+
+    arbol.write('salida.xml')
