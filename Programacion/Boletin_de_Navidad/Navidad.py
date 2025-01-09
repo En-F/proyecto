@@ -56,3 +56,42 @@ while True:
         else:
             pistas.append("=")
     print(" ".join(pistas))
+
+#Ejercicio 120
+#121. 
+import xml.etree.ElementTree as ET 
+
+
+# Parseamos el archivo 'club.xml' y lo almacenamos en un objeto 'arbol'.
+arbol = ET.parse('club.xml')
+# Obtenemos la raíz del árbol XML, que es el nodo principal.
+raiz = arbol.getroot()
+# Recorremos todos los nodos 'socio' que están dentro de 'socios'.
+for nodo in raiz.findall("socios/socio"):
+    # Obtenemos el valor del atributo 'id' del nodo 'socio' (por ejemplo, '1', '2', etc.).
+    ident = nodo.get('id')
+    # Buscamos el subelemento 'nombre' dentro del nodo 'socio' y extraemos su contenido de texto.
+    nombre = nodo.find("nombre").text
+    # Imprimimos el id del socio y su nombre de manera formateada.
+    print(f"[{ident}] {nombre}")
+
+#122.
+print(len(raiz.findall("socios/socio")))
+#devuelve cuántos socios tiene el club , resultado : 2 
+
+#127
+d = [['51': ('Winston Churchill', '1942-02-13')],
+     ['1':('Sherlock Holmes', '1890-12-14')] ]
+
+lista = []
+for nodo in raiz.findall('socios/socio'):
+    ident = nodo.get('id')
+    nombre = nodo.find("nombre").text       #type: ignore
+    alta = nodo.find("alta").text           #type: ignore
+    lista.append((alta, ident, nombre ))
+
+lista.sort()
+
+for t  in lista:
+    print(t[1:])
+    

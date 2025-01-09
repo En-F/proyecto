@@ -40,3 +40,18 @@ for alumno in raiz.findall('alumno'):
 
 # Imprimimos la estructura completa del árbol XML
 ET.dump(raiz)
+
+
+# Recorremos todos los elementos <nota> que aparecen en el árbol XML, sin importar su nivel de anidamiento.
+for nota in raiz.iter('nota'):
+    # Convertimos el valor de texto de <nota> a entero, le sumamos 1 y luego lo asignamos a la variable nueva_nota.
+    nueva_nota = int(nota.text) + 1
+    
+    # Asignamos el nuevo valor de nueva_nota al elemento <nota> en formato de texto.
+    nota.text = str(nueva_nota)
+    
+    # Establecemos un atributo 'modificado' con valor 'si' para marcar que este nodo ha sido modificado.
+    nota.set('modificado', 'si')
+
+# Guardamos los cambios realizados en el árbol XML en un nuevo archivo llamado 'salida.xml'.
+arbol.write('salida.xml',encoding='utf-8', xml_declaration=True)
