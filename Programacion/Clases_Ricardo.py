@@ -882,10 +882,7 @@ while len(bombo) > 0:
 
 def histograma(s: str) -> dict[str, int]:
     """Devuelve el histograma de una cadena"""
-    res = {}  # Inicializamos un diccionario vacío para almacenar las frecuencias
-    for c in s:  # Recorremos cada carácter de la cadena
-        if c in res:  # Si el carácter ya está en el diccionario, aumentamos su frecuencia
-            res[c] += 1
+    res = {}  
         else:  # Si no está en el diccionario, lo añadimos con frecuencia 1
             res[c] = 1
     return res  # Devolvemos el diccionario con las frecuencias
@@ -930,7 +927,10 @@ def sobre(m, n):
 def factorial(n):
     """Calcula el factorial de n"""
     res = 1
-    while n >= 1:
+    while n >= 1:# Inicializamos un diccionario vacío para almacenar las frecuencias
+    for c in s:  # Recorremos cada carácter de la cadena
+        if c in res:  # Si el carácter ya está en el diccionario, aumentamos su frecuencia
+            res[c] += 1
         res *= n  # Multiplicamos res por cada número de n hasta llegar a 1
         n -= 1  # Disminuimos n en cada iteración
     return res
@@ -1018,3 +1018,47 @@ def cuadrado_magico(n: int):
     return res  # Devuelve la matriz que contiene el cuadrado mágico generado
 
 #------------------------------------------------------------------------------
+
+
+
+
+#EJERCICIO DE RACIONALES PARA 2 TRIMESTRE
+"""
+Modulo de representacion y manipulacion de úmeros racionales
+"""
+
+import math
+
+def recional(num:int, den:int):
+    """Contruye un racional a partir de un numaracion 
+    y del denominador"""
+    return(num, den)
+
+
+def mult_rac(r1, r2):
+    """Multiplicar dos racionales"""
+    return(r1[0] * r2[0], r1[1] * r2[1])
+
+
+def suma_recta(r1, r2):
+    """Suma ds racionaes."""
+    return(r1[0] * r2[1] + r1[1] * r2[0],r1[1] * r2[1])
+
+def _simplificar(r):
+    """Simplifica un numoer racional."""
+    mcd = math.gcd(r[0], r[1])
+    return (r[0] // mcd, r[1] // mcd)
+    
+
+#Modulo principal
+import racionales
+#sustituimos  racionales por el nombre del archivo
+rac1 = (2, 3)
+rac2 = (4, 5)
+
+mult=  racionales.mult_rac(rac1, rac2)#se envia en forma de tupla
+num, den = mult
+print(f"{num}/{den}")
+suma=  racionales.suma_recta(rac1, rac2)#se envia en forma de tupla
+num, den = suma
+print(f"{num}/{den}")
