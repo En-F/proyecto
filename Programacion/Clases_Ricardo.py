@@ -1028,13 +1028,16 @@ Modulo de representacion y manipulacion de úmeros racionales
 """
 
 import math
-
-def recional(num:int, den:int):
-    """Contruye un racional a partir de un numaracion 
+#colocar las fotos que he realizado con el telefono
+def racional(num:int, den:int):
+    """Contruye un racional a partir de un numaración 
     y del denominador"""
     return(num, den)
 
 
+def numerador(r):
+    """Devuelve el numerador de una racional."""
+    return['num']
 def mult_rac(r1, r2):
     """Multiplicar dos racionales"""
     return(r1[0] * r2[0], r1[1] * r2[1])
