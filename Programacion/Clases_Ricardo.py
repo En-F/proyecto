@@ -257,7 +257,7 @@ print(sumatorio(5))
 # 
 # a) Implementar la función de forma no recursiva.
 potencia = lambda a,b : a**b #igual que la funcion pow
-potencia(a,0)=1 #caso base ya que cualquier numero elevar a 0 da uno 
+potencia(a,0)= 1 #caso base ya que cualquier numero elevar a 0 da uno 
 potencia(a,b), b>0 # no estamos e al caso base, tenemos que converteirlo en un caso entre 0
 # y b para que el segundo se acerque a al caso base para ello le restamos uno
 # a la b el caso que no es base es decir, lo que estasmo haciendo es reducir 
@@ -883,8 +883,8 @@ while len(bombo) > 0:
 def histograma(s: str) -> dict[str, int]:
     """Devuelve el histograma de una cadena"""
     res = {}  
-        else:  # Si no está en el diccionario, lo añadimos con frecuencia 1
-            res[c] = 1
+    if not in res:  # Si no está en el diccionario, lo añadimos con frecuencia 1
+        res[c] = 1
     return res  # Devolvemos el diccionario con las frecuencias
 
 # Probamos la función con una cadena de ejemplo
@@ -1065,3 +1065,21 @@ print(f"{num}/{den}")
 suma=  racionales.suma_recta(rac1, rac2)#se envia en forma de tupla
 num, den = suma
 print(f"{num}/{den}")
+
+
+"""
+Numeros Racionales
+"""
+
+class Racional:
+    def __init__(self, num, den): #se encarga de darle al objeto su forma inicial.
+        self.numer = num
+        self.denom = den 
+        
+        
+# manera de utilizarlo
+"""
+t = Raciaon(5,8)
+t.number = 5
+t.denom = 8
+"""        
