@@ -6,7 +6,7 @@ class Racional:
             raise ValueError("El denominador no puede ser cero")
         self.numer = num
         self.denom = den
-        self.simplificar()
+        self.__simplificar()
 
     def numerador(self):
         return self.numer
@@ -19,7 +19,7 @@ class Racional:
         d = self.denominador() * otro.denominador()
         return Racional(n, d)
     
-    def simplificar(self):
+    def __simplificar(self):
         mcd = math.gcd(self.numer, self.denom)
         self.numer = self.numer // mcd
         self.denom = self.denom // mcd
