@@ -136,3 +136,77 @@ SELECT
 FROM 
     emple  
 WHERE  lower(oficio) = 'vendedor';
+
+
+-- EJERCICIO DE CLASE
+--Devuelve los  investigadores que  trabaja en  algunos dde los  proyecto  donde trabaja el investigador 10 
+SELECT  
+    i.*
+FROM 
+    plan.investigador i 
+JOIN 
+    plan.asignado_a aa 
+ON 
+    i.cod_investigador =aa.cod_investigador 
+WHERE 
+    cod_proyecto = ALL/*(tambien se puede colocar ANY)*/ (SELECT
+                        cod_proyecto 
+                    FROM 
+                        plan.asignado_a
+                    WHERE 
+                        cod_investigador = 10);
+
+-------------------------------------------------------------------
+SELECT 
+    (
+    SELECT  count(*)
+    FROM investigador i 
+    ) AS "Num Investigadores",
+    (
+    SELECT  count(*)
+    FROM entidad 
+    ) AS "Num Entidades"
+    ;
+
+-------------------------------------------------------------------
+
+-- Seleccionamos el nombre de la ciudad convertido a mayúsculas
+SELECT         
+    upper(ciudad),          -- 'upper(ciudad)' convierte el nombre de la ciudad a mayúsculas
+    count(*)                -- 'count(*)' cuenta cuántos registros existen para cada ciudad
+FROM investigador          -- La consulta es sobre la tabla 'investigador'
+GROUP BY upper(ciudad);   -- Agrupamos por el nombre de la ciudad en mayúsculas
+
+
+-------------------------------------------------------------------
+-- Seleccionamos el código del investigador, su nombre y apellidos, y el número de proyectos en los que trabaja
+SELECT 
+    i.cod_investigador,       -- Código del investigador
+    i.nombre,                 -- Nombre del investigador
+    i.apellido1,              -- Primer apellido del investigador
+    i.apellido2,              -- Segundo apellido del investigador
+    count(cod_proyecto)       -- Contamos el número de proyectos en los que el investigador está asignado
+FROM 
+    investigador i            -- Desde la tabla 'investigador'
+    JOIN asignado_a aa        -- Hacemos un JOIN con la tabla 'asignado_a' para obtener los proyectos
+    USING (cod_investigador)  -- Usamos la columna 'cod_investigador' para hacer el JOIN entre ambas tablas
+GROUP BY 
+    cod_investigador         -- Agrupamos por el 'cod_investigador' para contar los proyectos por cada investigador
+ORDER BY 
+    cod_investigador ASC;    -- Ordenamos el resultado por el código del investigador en orden ascendente
+
+
+-------------------------------------------------------------------
+
+SELECT 
+    e.cod_entidad,             -- Seleccionamos el código de la entidad
+    e.entidad,                 -- Seleccionamos el nombre de la entidad
+    count(*)                   -- Contamos cuántos registros (proyectos) están asociados a cada entidad
+FROM 
+    plan p                     -- Desde la tabla 'plan' que tiene la información de los proyectos
+    JOIN entidad e ON p.cod_ent_financiera = e.cod_entidad  -- Hacemos un JOIN con la tabla 'entidad' usando el código de entidad
+GROUP BY 
+    e.cod_entidad,             -- Agrupamos por el código de entidad para obtener el número de proyectos por entidad
+    e.entidad                  -- También agrupamos por el nombre de la entidad para que esté disponible en el resultado
+ORDER BY 
+    e.cod_entidad ASC;         -- Ordenamos los resultados por el código de la entidad en orden ascendente
