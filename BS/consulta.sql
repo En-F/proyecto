@@ -210,3 +210,18 @@ GROUP BY
     e.entidad                  -- También agrupamos por el nombre de la entidad para que esté disponible en el resultado
 ORDER BY 
     e.cod_entidad ASC;         -- Ordenamos los resultados por el código de la entidad en orden ascendente
+
+
+
+-------------------------------------------------------------------
+--Conectado a la base de datos:efranco_plan  con public@efranco_plan
+--4. Dame todos los planes  con el numeor de proyecto que tiene cada plan.
+
+SELECT  
+    cod_plan,
+    plan.nombre,
+    count(pr.cod_proyecto) 
+FROM plan
+LEFT JOIN proyecto pr USING (cod_plan)
+GROUP BY cod_plan
+ORDER BY cod_plan;
