@@ -28,3 +28,14 @@ WHERE
                     WHERE 
                         cod_investigador = 10);
 
+
+
+SELECT 
+    e.cod_entidad,
+    e.entidad,
+    count(*) 
+FROM 
+    plan p
+    JOIN entidad e ON p.cod_ent_financiera= e.cod_entidad
+    GROUP  BY (cod_entidad)
+    HAVING count(*)>2 ;

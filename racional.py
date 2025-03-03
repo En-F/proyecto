@@ -4,15 +4,20 @@ class Racional:
     def __init__(self, num, den):
         if den == 0:
             raise ValueError("El denominador no puede ser cero")
-        self.numer = num
-        self.denom = den
+        self.__set_numerador(num)
+        self.__set_denominador(den)
+        assert num == self.numerador()
+        assert den == self.denominador()
         self.__simplificar()
-
-    def numerador(self):
-        return self.numer
-
-    def denominador(self):
-        return self.denom
+        assert num * self.denominador == den * self.numerador()
+    def __set_numerador(self, num):
+        return self.__numer
+        assert self.numerador() == num
+    def __set_denominador(self,den):
+        if den == 0:
+            raise ValueError("El denominador no puede ser cero")
+        self.__denom = den
+        assert self.denominador() == den    
 
     def mult(self, otro):
         n = self.numerador() * otro.numerador()
@@ -21,8 +26,25 @@ class Racional:
     
     def __simplificar(self):
         mcd = math.gcd(self.numer, self.denom)
-        self.numer = self.numer // mcd
-        self.denom = self.denom // mcd
+        num_antes = self.numerador()
+        den_antes = self.denominador()
+        self.__set_numerador = (self.numerador() // mcd)
+        self.__set_denominador = (self.denominador() // mcd)
+        num_despues = self.numerador()
+        den_despues = self.denominador() 
+        assert num_antes * den_antes == num_despues * den_despues
+        
+        
+    def __eq__(self,otro):  
+        if type(self) != type(otro):
+            return NotImplemented
+        return self.numerador() == otro.numerador() and \
+               self.denominador() == otro.denominador()
+    
+    def __str__(self):
+        num = self.numerador()
+        den = self.denominador()
+        return (f"{num}/{den}")
 
 
 r = Racional(3, 4)
