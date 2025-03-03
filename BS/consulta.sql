@@ -214,14 +214,22 @@ ORDER BY
 
 
 -------------------------------------------------------------------
---Conectado a la base de datos:efranco_plan  con public@efranco_plan
+--Conectado a la base de datos:efranco_plan  con public@efranco_plan 
 --4. Dame todos los planes  con el numeor de proyecto que tiene cada plan.
 
-SELECT  
-    cod_plan,
-    plan.nombre,
-    count(pr.cod_proyecto) 
-FROM plan
-LEFT JOIN proyecto pr USING (cod_plan)
-GROUP BY cod_plan
-ORDER BY cod_plan;
+SELECT 
+    cod_investigador AS "Código",
+    concat(nombre,' ',apellido1,' ', apellido2) AS "Nombre",
+    count(cod_proyecto) AS "Proyectos"
+FROM investigador LEFT JOIN asignado_a  USING(cod_investigador) 
+GROUP BY investigador.cod_investigador
+ORDER BY count(cod_investigador) ;
+
+
+
+--Ordena los nombres de los proyectos que no tiene investiadores
+SELECT
+    p.cod_proyecto AS "Código" ,
+    p.nombre AS "Nombre"
+FROM proyecto p LEFT JOIN asignado_a aa  USING(cod_proyecto)
+GROUP BY p.cod_proyecto ;
