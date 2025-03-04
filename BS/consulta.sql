@@ -213,8 +213,121 @@ ORDER BY
 
 
 
--------------------------------------------------------------------
---Conectado a la base de datos:efranco_plan  con public@efranco_plan 
+
+    
+--Proyecto (código y nombre) que tienen el menor presupuesto            
+SELECT p.cod_proyecto AS "código",
+       p.nombre AS "Nombre"
+FROM proyecto p
+WHERE p.presupuesto = (SELECT MIN(p.presupuesto) FROM proyecto p);
+
+--2. Investigadores que viven en la misma ciudad 
+--que el investigador con código 8
+
+SELECT *
+FROM investigador i 
+WHERE  ciudad = (SELECT i.ciudad 
+FROM investigador i 
+WHERE cod_investigador  = 8);
+
+--3. Investigadores que en algunos de los 
+--proyectos en los que trabaja el investigador 12
+
+SELECT i.*
+FROM asignado_a aa 
+JOIN investigador i  ON aa.cod_investigador = i.cod_investigador 
+WHERE aa.cod_proyecto = ANY (SELECT cod_proyecto 
+                        FROM asignado_a 
+                        WHERE  cod_investigador = 12
+                                );
+
+--4. Listado de planes (Código y nombre), que no tienen proyectos
+                            
+SELECT
+    pl.cod_plan, 
+    pl.nombre
+FROM plan pl
+WHERE pl.cod_plan NOT IN 
+    (SELECT  DISTINCT p.cod_plan 
+    FROM proyecto p);
+
+
+
+--5. Listado de investigadores (Código y nombre) 
+--que no participan en ningún proyecto
+
+SELECT
+    i.cod_investigador,
+    i.nombre 
+FROM investigador i
+WHERE i.cod_investigador NOT IN (
+                            SELECT aa.cod_investigador 
+                             FROM asignado_a aa 
+                            )
+ORDER BY cod_investigador  ASC ;
+
+
+
+--Obtener un listado con el id de empleado que es jefe y con el número de empleados que dirige
+
+SELECT e.nombre,e.dir , COUNT(e2.emp_no) AS "num_empleados"
+FROM emple e
+JOIN emple e2 ON e.emp_no = e2.dir 
+GROUP BY e.emp_no;
+
+d
+SELECT  * FROM emple ;
+
+
+
+--4. Dame todos los planes  con el numeor de proyecto que tiene cada plan.
+
+SELECT  
+    cod_plan,
+    plan.nombre,
+    count(pr.cod_proyecto) 
+FROM plan
+LEFT JOIN proyecto pr USING (cod_plan)
+GROUP BY cod_plan
+ORDER BY cod_plan;
+
+            
+
+SELECT  
+    cod_plan,
+    plan.nombre,
+    count(pr.cod_proyecto) 
+FROM plan
+LEFT JOIN proyecto pr USING (cod_plan)
+GROUP BY cod_plan
+ORDER BY cod_plan DESC ;
+
+
+
+
+--2 Ordena el istado de todos los investigadres que tenemos registrados junto con el ombre deproyectos en los que participa
+--Codigo,Nombre,Proyecto
+--Ordena los inestigaroes por el numero de proyectos
+--en los que participa (de menor a mayor)
+SELECT 
+    cod_investigador AS "Código",
+    concat_ws(' ',nombre,apellido1,apellido2) AS "Nombre",
+    count(cod_proyecto) AS "Proyectos"
+FROM investigador LEFT JOIN asignado_a  USING(cod_investigador) 
+GROUP BY cod_investigador
+ORDER BY count(cod_proyecto) ;
+
+
+
+--Ordena los nombres de los proyectos que no tiene investiadores
+SELECT
+    p.cod_proyecto AS "Código" ,
+    p.nombre AS "Nombre"
+FROM proyecto p LEFT JOIN asignado_a aa  USING(cod_proyecto)
+GROUP BY p.cod_proyecto 
+ORDER BY cod_proyecto ;
+
+
 --4. Dame todos los planes  con el numeor de proyecto que tiene cada plan.
 
 SELECT 
@@ -233,3 +346,37 @@ SELECT
     p.nombre AS "Nombre"
 FROM proyecto p LEFT JOIN asignado_a aa  USING(cod_proyecto)
 GROUP BY p.cod_proyecto ;
+
+SELECT 
+    cod_proyecto ,
+    nombre
+FROM  asignado_a aa  RIGHT JOIN proyecto p  using(cod_proyecto)
+GROUP BY cod_proyecto 
+HAVING count(cod_investigador) = 0 
+ORDER BY cod_proyecto ;
+
+SELECT 
+    cod_proyecto ,
+    nombre
+FROM proyecto p 
+WHERE cod_proyecto NOT IN (SELECT DISTINCT cod_proyecto FROM asignado_a aa);
+
+--5 Obtener todos los proyectos existentes junto con el numeor de investigador de C... Leer más
+
+SELECT 
+    p.cod_proyecto AS "Codigo",
+    p.nombre AS "Nombre",
+    COUNT(aa.cod_investigador) AS "Investigadores"
+FROM 
+    proyecto p
+LEFT JOIN 
+    asignado_a aa USING(cod_proyecto)
+LEFT JOIN 
+--Lo que esta dentro del on se ejecuta antes del join, el where se ejecuta despues del join.
+    investigador i ON (aa.cod_investigador = i.cod_investigador
+    AND UPPER(i.ciudad) = 'CÁDIZ')  
+GROUP BY 
+    p.cod_proyecto
+ORDER BY
+    p.cod_proyecto ;
+
