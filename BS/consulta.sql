@@ -380,3 +380,232 @@ GROUP BY
 ORDER BY
     p.cod_proyecto ;
 
+--1
+
+SELECT 
+    codcliente AS "Código",
+    nomcliente AS "Nombre",
+    ap1cliente AS "Primer Apellido",
+    ap2cliente AS "Segundo Apellido"
+FROM cliente  
+ORDER BY  ap1cliente ,ap2cliente ,nomcliente ;
+
+--2
+
+SELECT 
+    codcliente AS "Código",
+    concat_ws(' ',nomcliente,ap1cliente,ap2cliente) 
+FROM cliente  
+ORDER BY ap1cliente DESC ;
+
+--3
+SELECT 
+    codcliente AS "Código",
+    nomcliente AS "Nombre",
+    ap1cliente AS "Primer apellido",
+    ap2cliente AS "Segundo apellido"
+FROM cliente 
+WHERE credito > 1000::money
+ORDER BY  ap1cliente ,ap2cliente ,nomcliente ;
+
+--4
+SELECT 
+    codoficina AS "Código",
+    ciudad AS "Ciudad",
+    objetivo AS "Objetivo"
+FROM oficina a 
+WHERE 
+    (upper(ciudad) = 'SANLÚCAR') 
+or  
+    (upper(ciudad) ='CHIPIONA')
+OR 
+    (upper(ciudad) = 'ROTA');
+
+
+--5
+SELECT 
+    ciudad 
+FROM oficina 
+WHERE ciudad LIKE '%c%'
+ORDER BY ciudad ;
+
+--6
+SELECT 
+    v.codvendedor AS "Codigo",
+    v.ap1vendedor AS "Primer apeliido",
+    v.ap2vendedor AS "Segundo apellido",
+    v.nomvendedor AS "Nombre",
+    a.ciudad AS "Ciudad"
+FROM vendedor v JOIN oficina a ON v.codoficina = a.codoficina 
+ORDER BY ciudad ,v.ap1vendedor, v.ap2vendedor,v.nomvendedor ;
+
+
+--7
+SELECT 
+    v.codvendedor AS "Codigo",
+    v.ap1vendedor AS "Primer apellido",
+    v.ap2vendedor AS "Segundo apellido",
+    v.nomvendedor AS "Nombre"
+FROM vendedor v LEFT JOIN oficina o using(codoficina)
+WHERE upper(ciudad) = 'SANLÚCAR' 
+ORDER BY v.ap1vendedor , v.ap2vendedor ,v.nomvendedor ;
+
+
+--8
+SELECT
+    C.codcliente AS "Cósigo",
+    c.nomcliente AS "NOmbre",
+    c.ap1cliente AS "Primer apellido",
+    c.ap2cliente AS "Segundo apellido",
+    extract(YEAR FROM age(fnacimiento)) AS "Edad"
+FROM cliente c 
+ORDER BY  ap1cliente ,ap2cliente ,nomcliente;
+
+--9
+SELECT 
+count(DISTINCT codarticulo)AS "Num Productos" 
+FROM articulo a ;
+
+
+
+--10
+SELECT 
+    DISTINCT ciudad AS "Ciudad"
+FROM cliente  
+ORDER BY ciudad DESC ;
+
+
+--11
+SELECT 
+     count(DISTINCT ciudad) AS "Num Ciudades" 
+FROM cliente  ;
+
+--12
+
+SELECT 
+    numfactura AS "Num Factura",
+    fecha AS "Fecha",
+    d.codarticulo AS "Cod Articulo",
+    d.cantidad AS "Cantidad"
+FROM factura  f JOIN detalle d using(numfactura)
+WHERE numfactura  = 8;
+
+--13
+SELECT 
+    numfactura AS "Num Factura",
+    fecha AS "Fecha",
+    d.codarticulo AS "Cod Articulo",
+    a.nomarticulo AS "Articulo",
+    a.precio AS "Precio",
+    d.cantidad AS "Cantidad"
+FROM factura  f JOIN   detalle d using(numfactura)
+JOIN articulo a using(codarticulo)
+WHERE  d.numfactura = 8
+ORDER BY nomarticulo ;
+
+--14
+SELECT 
+    numfactura AS "Num Factura",
+    fecha AS "Fecha",
+    d.codarticulo AS "Cod Articulo",
+    a.nomarticulo AS "Articulo",
+    a.precio AS "Precio",
+    d.cantidad AS "Cantidad",
+    (d.cantidad * a.precio)AS "Precio Total"
+FROM factura  f JOIN   detalle d using(numfactura)
+JOIN articulo a using(codarticulo)
+WHERE  d.numfactura = 8
+ORDER BY nomarticulo ;
+
+
+--15
+SELECT 
+    codarticulo AS "Codigo articulo",
+    nomarticulo  AS "Nombre",
+    precio AS "precio"
+FROM articulo  
+WHERE  precio = (SELECT max(precio)FROM articulo);
+
+--16
+SELECT 
+    codarticulo AS "Codigo articulo",
+    nomarticulo  AS "Nombre",
+    precio AS "precio"
+FROM articulo  
+WHERE  precio = (SELECT max(precio)FROM articulo)
+or precio = (SELECT min(precio)FROM articulo)
+ORDER BY nomarticulo ;
+
+
+--17
+select 
+    codarticulo as "Código", 
+    nomarticulo as "Articulo"
+from articulo join detalle using (codarticulo) 
+join factura using (numfactura)
+    where codcliente = 5
+INTERSECT
+select 
+    codarticulo as "Código", 
+    nomarticulo as "Articulo"
+from articulo join detalle using (codarticulo) 
+    join factura using (numfactura)
+    where codcliente = 8;
+
+--18
+SELECT 
+    c.codcliente AS "Codigo",
+    c.ap1cliente AS "Primer apellido",
+    c.ap2cliente AS "Segundo apellido",
+    c.nomcliente AS "Nombre",
+    count(numfactura)  AS "Num compras"
+FROM cliente c LEFT JOIN factura f using(codcliente)
+GROUP BY codcliente 
+ORDER BY "Num compras" DESC ,c.ap1cliente,c.ap2cliente,c.nomcliente;
+
+--19
+SELECT 
+    c.codcliente AS "Codigo",
+    c.ap1cliente AS "Primer apellido",
+    c.ap2cliente AS "Segundo apellido",
+    c.nomcliente AS "Nombre",
+    count(numfactura)  AS "Num compras"
+FROM cliente c LEFT JOIN factura f using(codcliente)
+GROUP BY codcliente 
+ORDER BY "Num compras" DESC ,c.ap1cliente,c.ap2cliente,c.nomcliente LIMIT 5 OFFSET 5;
+
+--20
+SELECT 
+    v.codvendedor AS "Codigo",
+    v.ap1vendedor AS "Primer apellido",
+    v.ap2vendedor AS "Segundo apellido",
+    v.nomvendedor AS "Nombre",
+    count(numfactura)  AS "Num compras"
+FROM vendedor v  LEFT JOIN factura f using(codvendedor)
+GROUP BY codvendedor
+ORDER BY "Num compras"desc;
+
+--21
+select 
+    codvendedor AS "Código", 
+    ap1vendedor AS "Primer Apellido", ap2vendedor AS "Segundo Apellido" , nomvendedor AS "Nombre", count(numfactura) as "Num Ventas"
+FROM vendedor join factura using (codvendedor)
+group by codvendedor HAVING COUNT(numfactura) = (
+    SELECT MIN(ventas) FROM (
+        SELECT COUNT(numfactura) AS ventas
+        FROM vendedor
+        JOIN factura USING (codvendedor)
+        GROUP BY codvendedor
+    ) as "Subconsulta");
+--22
+select codvendedor AS "Código", ap1vendedor AS "Primer Apellido", ap2vendedor AS "Segundo Apellido" , nomvendedor AS "Nombre", count(numfactura) as "Num Ventas"
+FROM vendedor left join factura using (codvendedor)
+group by codvendedor HAVING COUNT(numfactura) = (
+    SELECT MIN(ventas) FROM (
+        SELECT COUNT(numfactura) AS ventas
+        FROM vendedor
+        left JOIN factura USING (codvendedor)
+        GROUP BY codvendedor
+    ) as "Subconsulta");
+
+
