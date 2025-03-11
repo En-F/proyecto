@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="productos">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="producto" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="nombre">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:minLength value="3"/>
+                                        <xs:maxLength value="50"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="fechaFabricacion">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:date">
+                                        <xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="precio">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:decimal">
+                                        <xs:minInclusive value="0"/>
+                                        <xs:maxInclusive value="1000"/>
+                                        <xs:fractionDigits value="2"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="categoria">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Electrónica"/>
+                                        <xs:enumeration value="Accesorios"/>
+                                        <xs:enumeration value="Hogar"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="enOferta">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:boolean">
+                                        <xs:pattern value="true|false"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="codigo" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:length value="4"/>
+                                    <xs:pattern value="[A-Za-z0-9]{4}"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
