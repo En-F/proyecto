@@ -1,22 +1,15 @@
-positivo = False
-while (not positivo):
-    m = int(input("Introduce un número entero par y positivo: "))
-    if m>=0:
-        positivo= True
+def comprueba_numero(mensaje):
+    while (True):
+        numero = int(input(mensaje))
+        if numero>=0:
+            return numero
 
-positivo = False
+par= comprueba_numero("Introduce un número entero par y positivo:  ")
+impar = comprueba_numero("Introduce un número entero impar y positivo: ")
+positivo=comprueba_numero("Introduce un número entero cualquiera y positivo: ")
 
-while (not positivo):
-    n = int(input("Introduce un número entero impar y positivo: "))
-    if n>=0:
-        positivo= True
-
-positivo = False
-
-while (not positivo):
-    p = int(input("Introduce un número entero cualquiera y positivo: "))
-    if p>=0:
-        positivo= True
-
-suma=m+n+p
+suma=par + impar + positivo
 print("La suma de los número es: " + str(suma))
+
+#debido a la repeticion de codigo se ha llevadoa cabo la etraccion y 
+# mediante el uso de variables con nombre mas explicativos se va llamando a funcion 
