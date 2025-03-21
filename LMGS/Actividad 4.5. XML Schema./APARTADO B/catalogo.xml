@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<biblioteca> 
+    <libro isbn="978-3-16-148410-0"> 
+        <titulo>El Señor de los Anillos</titulo> 
+        <autor>J.R.R. Tolkien</autor> 
+        <fechaPublicacion>1954-07-29</fechaPublicacion> 
+        <genero>Fantasía</genero> 
+        <calificacionPromedio>4.9</calificacionPromedio> 
+        <edicionEspecial>false</edicionEspecial> 
+    </libro> 
+    <libro isbn="978-0-06-112008-4"> 
+        <titulo>To Kill a Mockingbird</titulo> 
+        <autor>Harper Lee</autor> 
+        <fechaPublicacion>1960-07-11</fechaPublicacion> 
+        <genero>Ficción</genero> 
+        <calificacionPromedio>4.8</calificacionPromedio> 
+        <edicionEspecial>true</edicionEspecial> 
+    </libro> 
+    <libro isbn="978-1-4028-9467-2"> 
+        <titulo>1984</titulo> 
+        <autor>George Orwell</autor> 
+        <fechaPublicacion>1949-06-08</fechaPublicacion> 
+        <genero>Distopía</genero> 
+        <calificacionPromedio>4.7</calificacionPromedio> 
+        <edicionEspecial>false</edicionEspecial> 
+    </libro> 
+</biblioteca>

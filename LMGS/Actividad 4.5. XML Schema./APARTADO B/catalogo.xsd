@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:element name="biblioteca">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="libro" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="titulo" type="xs:string"/>
+              <xs:element name="autor" type="xs:string"/>
+              <xs:element name="fechaPublicacion" type="xs:date"/>
+              <xs:element name="genero" type="xs:string"/>
+              <xs:element name="calificacionPromedio" type="xs:decimal"/>
+              <xs:element name="edicionEspecial" type="xs:boolean"/>
+            </xs:sequence>
+            <xs:attribute name="isbn" type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:simpleType name="isbnType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{3}-\d{2}-\d{4}-\d{4}-\d{1}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="tituloType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="150"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="generoType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Fantasía"/>
+      <xs:enumeration value="Ficción"/>
+      <xs:enumeration value="Distopía"/>
+      <xs:enumeration value="Ciencia Ficción"/>
+      <xs:enumeration value="Biografía"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="calificacionPromedioType">
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="1"/>
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="5"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>
