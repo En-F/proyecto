@@ -21,66 +21,70 @@ class Aplication(tk.Tk):
            
     def botonones(self):
         """Los botones"""
-        boton_9 = tk.Button(self, text="9")
+        boton_9 = tk.Button(self, text="9", command=lambda: self.boton_presionado("9"))
         boton_9.grid(row=1, column=2)
-        
-        boton_8 = tk.Button(self, text="8")
+
+        boton_8 = tk.Button(self, text="8", command=lambda: self.boton_presionado("8"))
         boton_8.grid(row=1, column=1)
-        
-        boton_7 = tk.Button(self, text="7")
+
+        boton_7 = tk.Button(self, text="7", command=lambda: self.boton_presionado("7"))
         boton_7.grid(row=1, column=0)
-        
-        boton_AC = tk.Button(self, text="AC")
+
+        boton_AC = tk.Button(self, text="AC", command=lambda: self.boton_presionado("AC"))
         boton_AC.grid(row=1, column=3)
-        
-        boton_menos = tk.Button(self, text="-")
+
+        boton_menos = tk.Button(self, text="-", command=lambda: self.boton_presionado("-"))
         boton_menos.grid(row=3, column=3)
-        
-        boton_suma = tk.Button(self, text="+")
+
+        boton_suma = tk.Button(self, text="+", command=lambda: self.boton_presionado("+"))
         boton_suma.grid(row=2, column=3)
-        
-        boton_igual = tk.Button(self, text="=")
+
+        boton_igual = tk.Button(self, text="=", command=lambda: self.boton_presionado("="))
         boton_igual.grid(row=4, column=3)
-        
-        boton_mult = tk.Button(self, text="*")
+
+        boton_mult = tk.Button(self, text="*", command=lambda: self.boton_presionado("*"))
         boton_mult.grid(row=4, column=1)
-        
-        boton_4 = tk.Button(self, text="4")
+
+        boton_4 = tk.Button(self, text="4", command=lambda: self.boton_presionado("4"))
         boton_4.grid(row=2, column=0)
-        
-        boton_5 = tk.Button(self, text="5")
+
+        boton_5 = tk.Button(self, text="5", command=lambda: self.boton_presionado("5"))
         boton_5.grid(row=2, column=1)
-        
-        boton_6 = tk.Button(self, text="6")
+
+        boton_6 = tk.Button(self, text="6", command=lambda: self.boton_presionado("6"))
         boton_6.grid(row=2, column=2)
-        
-        boton_1 = tk.Button(self, text="1")
+
+        boton_1 = tk.Button(self, text="1", command=lambda: self.boton_presionado("1"))
         boton_1.grid(row=3, column=0)
-        
-        boton_2 = tk.Button(self, text="2")
+
+        boton_2 = tk.Button(self, text="2", command=lambda: self.boton_presionado("2"))
         boton_2.grid(row=3, column=1)
-        
-        boton_3 = tk.Button(self, text="3")
+
+        boton_3 = tk.Button(self, text="3", command=lambda: self.boton_presionado("3"))
         boton_3.grid(row=3, column=2)
-        
-        boton_0 = tk.Button(self, text="0")
-        boton_0.grid(row=4, column=0)
-        
-        boton_dividir = tk.Button(self, text="/")
-        boton_dividir.grid(row=4, column=2)
-        
-        boton_dividir = tk.Button(self, text="/")
-        boton_dividir.grid(row=4, column=2)
 
-def calcular(self, event=None) -> None:
-    """Calcula el resultado"""
-    pass
+        botno_0 = tk.Button(self,text="0", command=lambda: self.boton_presionado("0"))
+        botno_0.grid(row=4, column=0)
+
+        botno_dividir = tk.Button(self,text="/", command=lambda: self.boton_presionado("/"))
+        botno_dividir.grid(row=4, column=2)
 
 
-def boton_presionado(self,numero):
-    if numero == "AC":
-        self.pantalla.delete(0)
-    elif numero == "=":
+    def boton_presionado(self,numero):
+        """Lógica para lo que ocurre cuando se presiona un botón"""
+        actual = self.pantalla.get()
+
+        if numero == "AC":
+            self.pantalla.delete(0, tk.END)  # Limpiar la pantalla
+        elif numero == "=":
+            try:
+                resultado = eval(actual)  # Evaluar la expresión matemática
+                self.pantalla.delete(0, tk.END)
+                self.pantalla.insert(tk.END, str(resultado))
+            except Exception as e:
+                messagebox.showerror("Error", f"Error en la operación: {e}")
+        else:
+            self.pantalla.insert(tk.END, numero)
         
 
 
