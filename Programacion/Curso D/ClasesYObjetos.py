@@ -16,3 +16,4 @@ celular2 = Celular("Apple", "Iphone 15 Pro", "96MP")
 
 # Haciendo una llamada desde celular2
 celular2.llamar()
+celular1.llamar()
